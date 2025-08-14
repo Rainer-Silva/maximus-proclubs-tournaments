@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Clubs Championship | Competitive FIFA Tournaments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for animations and effects */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+        }
+        
+        .club-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .tournament-card:hover .tournament-overlay {
+            opacity: 1;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Navigation -->
+    <nav class="gradient-bg fixed w-full z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-trophy text-yellow-400 text-2xl"></i>
+                <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-200">ProClubs<span class="text-white">Champ</span></a>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-yellow-400 transition">Home</a>
+                <a href="#tournaments" class="hover:text-yellow-400 transition">Tournaments</a>
+                <a href="#teams" class="hover:text-yellow-400 transition">Teams</a>
+                <a href="#standings" class="hover:text-yellow-400 transition">Standings</a>
+                <a href="#transfer-market" class="hover:text-yellow-400 transition">Transfer Market</a>
+                <a href="#about" class="hover:text-yellow-400 transition">About</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-4 py-2 rounded-full transition flex items-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Login
+                </button>
+                <button class="md:hidden text-white text-xl" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-gray-800 w-full" id="mobile-menu">
+            <div class="flex flex-col space-y-3 px-4 py-3">
+                <a href="#home" class="hover:text-yellow-400 transition py-2 border-b border-gray-700">Home</a>
+                <a href="#tournaments" class="hover:text-yellow-400 transition py-2 border-b border-gray-700">Tournaments</a>
+                <a href="#teams" class="hover:text-yellow-400 transition py-2 border-b border-gray-700">Teams</a>
+                <a href="#standings" class="hover:text-yellow-400 transition py-2 border-b border-gray-700">Standings</a>
+                <a href="#transfer-market" class="hover:text-yellow-400 transition py-2 border-b border-gray-700">Transfer Market</a>
+                <a href="#about" class="hover:text-yellow-400 transition py-2">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg pt-32 pb-20 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Compete in the Ultimate <span class="text-yellow-400">Pro Clubs</span> Tournament</h1>
+                <p class="text-xl text-gray-300 mb-8">Join thousands of players in our competitive FIFA Pro Clubs leagues and tournaments. Showcase your skills and climb the ranks!</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-6 py-3 rounded-full transition flex items-center justify-center">
+                        <i class="fas fa-play-circle mr-2"></i> Register Now
+                    </button>
+                    <button class="border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 font-bold px-6 py-3 rounded-full transition flex items-center justify-center">
+                        <i class="fas fa-info-circle mr-2"></i> Learn More
+                    </button>
+                </div>
+            </div>
+            <div class="md:w-1/2 fade-in delay-1 flex justify-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="FIFA Tournament" class="rounded-xl shadow-2xl w-full max-w-lg">
+                    <div class="absolute -bottom-5 -right-5 bg-gray-800 p-4 rounded-xl shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-yellow-500 p-2 rounded-full mr-3">
+                                <i class="fas fa-trophy text-gray-900 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Current Prize Pool</p>
+                                <p class="text-2xl font-bold">$25,000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="bg-gray-800 py-12 px-4">
+        <div class="container mx-auto text-center fade-in delay-2">
+            <h2 class="text-3xl font-bold mb-2">Next Tournament Begins In</h2>
+            <p class="text-gray-400 mb-8">Register your team before time runs out!</p>
+            
+            <div class="flex justify-center space-x-2 sm:space-x-6">
+                <div class="countdown-item rounded-lg p-4 w-20 sm:w-24">
+                    <div class="text-3xl sm:text-4xl font-bold" id="countdown-days">07</div>
+                    <div class="text-sm text-gray-400">Days</div>
+                </div>
+                <div class="countdown-item rounded-lg p-4 w-20 sm:w-24">
+                    <div class="text-3xl sm:text-4xl font-bold" id="countdown-hours">12</div>
+                    <div class="text-sm text-gray-400">Hours</div>
+                </div>
+                <div class="countdown-item rounded-lg p-4 w-20 sm:w-24">
+                    <div class="text-3xl sm:text-4xl font-bold" id="countdown-minutes">45</div>
+                    <div class="text-sm text-gray-400">Minutes</div>
+                </div>
+                <div class="countdown-item rounded-lg p-4 w-20 sm:w-24">
+                    <div class="text-3xl sm:text-4xl font-bold" id="countdown-seconds">30</div>
+                    <div class="text-sm text-gray-400">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EA FC 25 Live Data Integration Notice -->
+    <section class="py-12 px-4 bg-gray-800">
+        <div class="container mx-auto text-center fade-in">
+            <h2 class="text-2xl font-bold mb-3 text-yellow-400">Live EA FC 25 Club & Player Data</h2>
+            <p class="text-gray-300 max-w-2xl mx-auto mb-4">Our platform fetches real-time club and player stats directly from EA FC 25 using official EA Pro Clubs APIs. Data is updated frequently to ensure you always see the latest results, leaderboards, and player performances.</p>
+            <p class="text-gray-400">Want your club featured? <span class="text-yellow-400 font-semibold">Enter your Club ID and Platform</span> below to see live stats!</p>
+            <form id="ea-club-form" class="mt-6 flex flex-col md:flex-row justify-center items-center gap-4">
+                <input id="ea-club-id" type="text" placeholder="Club ID" class="px-4 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" required />
+                <select id="ea-platform" class="px-4 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" required>
+                    <option value="">Select Platform</option>
+                    <option value="ps5">PlayStation</option>
+                    <option value="xbox">Xbox</option>
+                    <option value="pc">PC</option>
+                </select>
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-6 py-2 rounded-full transition">Fetch Club Data</button>
+            </form>
+            <div id="ea-club-result" class="mt-8"></div>
+        </div>
+    </section>
+
+    <!-- Tournaments Section -->
+    <section id="tournaments" class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold mb-3">Upcoming Tournaments</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Compete in our weekly and monthly tournaments with different formats and prize pools</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tournament Card 1 -->
+                <div class="tournament-card bg-gray-800 rounded-xl overflow-hidden shadow-lg transition transform hover:scale-105 fade-in delay-1">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Champions League" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center tournament-overlay opacity-0 transition">
+                            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-6 py-2 rounded-full transition">
+                                Register Now
+                            </button>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-blue-500 text-white font-bold px-3 py-1 rounded-full text-sm">
+                            Daily
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">Champions League</h3>
+                            <span class="bg-gray-700 text-yellow-400 text-xs px-2 py-1 rounded">32 Teams</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Our flagship tournament featuring the best Pro Clubs teams from around the world.</p>
+                        <div class="flex justify-between text-sm">
+                            <div class="flex items-center text-gray-300">
+                                <i class="fas fa-calendar-alt mr-2 text-yellow-400"></i>
+                                <span>June 15 - July 10</span>
+                            </div>
+                            <div class="flex items-center text-gray-300">
+                                <i class="fas fa-users mr-2 text-yellow-400"></i>
+                                <span>11v11</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tournament Card 2 -->
+                <div class="tournament-card bg-gray-800 rounded-xl overflow-hidden shadow-lg transition transform hover:scale-105 fade-in delay-2">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Weekly Cup" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center tournament-overlay opacity-0 transition">
+                            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-6 py-2 rounded-full transition">
+                                Register Now
+                            </button>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-blue-500 text-white font-bold px-3 py-1 rounded-full text-sm">
+                            Weekly
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">Weekly Cup</h3>
+                            <span class="bg-gray-700 text-yellow-400 text-xs px-2 py-1 rounded">16 Teams</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Fast-paced tournament perfect for testing new strategies and formations.</p>
+                        <div class="flex justify-between text-sm">
+                            <div class="flex items-center text-gray-300">
+                                <i class="fas fa-calendar-alt mr-2 text-yellow-400"></i>
+                                <span>Every Saturday</span>
+                            </div>
+                            <div class="flex items-center text-gray-300">
+                                <i class="fas fa-users mr-2 text-yellow-400"></i>
+                                <span>6v6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tournament Card 3 -->
+                <div class="tournament-card bg-gray-800 rounded-xl overflow-hidden shadow-lg transition transform hover:scale-105 fade-in delay-3">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1551958219-acbc608c9097?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Regional Showdown" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center tournament-overlay opacity-0 transition">
+                            <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-6 py-2 rounded-full transition">
+                                Register Now
+                            </button>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-blue-500 text-white font-bold px-3 py-1 rounded-full text-sm">
+                            Monthly
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">Regional Showdown</h3>
+                            <span class="bg-gray-700 text-yellow-400 text-xs px-2 py-1 rounded">24 Teams</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Compete against teams from your region for bragging rights and prizes.</p>
+                        <div class="flex justify-between text-sm">
+                            <div class="flex items-center text-gray-300">
+                                <i class="fas fa-calendar-alt mr-2 text-yellow-400"></i>
+                                <span>July 5 - July 12</span>
+                            </div>
+                            <div class="flex items-center text-gray-300">
+                                <i class="fas fa-users mr-2 text-yellow-400"></i>
+                                <span>8v8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in delay-3">
+                <button class="border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 font-bold px-8 py-3 rounded-full transition">
+                    View All Tournaments
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teams Section -->
+    <section id="teams" class="py-16 px-4 bg-gray-900">
+        <div class="container mx-auto">
+            <div class="text-center mb-8 fade-in">
+                <h2 class="text-3xl font-bold mb-3">Teams</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Browse and explore your favorite Pro Clubs teams</p>
+            </div>
+            <div id="club-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="club-card bg-gray-800 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-1" data-name="Goal Machine FC">
+                    <h3 class="font-bold text-lg mb-2">Goal Machine FC</h3>
+                    <p class="text-gray-400">Top scoring club in the league.</p>
+                </div>
+                <div class="club-card bg-gray-800 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-2" data-name="Defenders United">
+                    <h3 class="font-bold text-lg mb-2">Defenders United</h3>
+                    <p class="text-gray-400">Best defensive record.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Standings & Stats Section -->
+    <section id="standings" class="py-16 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <div class="text-center mb-8 fade-in">
+                <h2 class="text-3xl font-bold mb-3 text-yellow-400">Standings & Stats</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">Live league table, top scorers, assists, MVPs, highest ratings, and Team of the Week/Month</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- League Table -->
+                <div class="bg-gray-900 rounded-xl p-6 shadow-lg fade-in delay-1">
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400">League Table</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-left">
+                            <thead class="bg-gray-800 text-yellow-300">
+                                <tr>
+                                    <th class="px-4 py-2">#</th>
+                                    <th class="px-4 py-2">Club</th>
+                                    <th class="px-4 py-2">P</th>
+                                    <th class="px-4 py-2">W</th>
+                                    <th class="px-4 py-2">D</th>
+                                    <th class="px-4 py-2">L</th>
+                                    <th class="px-4 py-2">GF</th>
+                                    <th class="px-4 py-2">GA</th>
+                                    <th class="px-4 py-2">GD</th>
+                                    <th class="px-4 py-2">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-gray-700">
+                                <!-- Dynamic content will be rendered here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Stats Panels -->
+                <div class="space-y-8">
+                    <div class="bg-gray-900 rounded-xl p-6 shadow-lg fade-in delay-2">
+                        <h3 class="text-xl font-bold mb-4 text-yellow-400">Top Scorers</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between"><span>Copilot (Goal Machine FC)</span><span class="font-bold text-yellow-300">21</span></li>
+                            <li class="flex justify-between"><span>J. Smith (Midfield Masters)</span><span class="font-bold">17</span></li>
+                            <li class="flex justify-between"><span>A. Silva (Defenders United)</span><span class="font-bold">15</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 rounded-xl p-6 shadow-lg fade-in delay-3">
+                        <h3 class="text-xl font-bold mb-4 text-yellow-400">Top Assists</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between"><span>M. Müller (Goal Machine FC)</span><span class="font-bold text-yellow-300">13</span></li>
+                            <li class="flex justify-between"><span>Copilot (Goal Machine FC)</span><span class="font-bold">11</span></li>
+                            <li class="flex justify-between"><span>L. Garcia (Defenders United)</span><span class="font-bold">10</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 rounded-xl p-6 shadow-lg fade-in delay-4">
+                        <h3 class="text-xl font-bold mb-4 text-yellow-400">MVPs</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between"><span>Copilot (Goal Machine FC)</span><span class="font-bold text-yellow-300">7</span></li>
+                            <li class="flex justify-between"><span>A. Silva (Defenders United)</span><span class="font-bold">6</span></li>
+                            <li class="flex justify-between"><span>J. Smith (Midfield Masters)</span><span class="font-bold">5</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 rounded-xl p-6 shadow-lg fade-in delay-5">
+                        <h3 class="text-xl font-bold mb-4 text-yellow-400">Highest Ratings</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between"><span>Copilot (Goal Machine FC)</span><span class="font-bold text-yellow-300">8.9</span></li>
+                            <li class="flex justify-between"><span>M. Müller (Goal Machine FC)</span><span class="font-bold">8.7</span></li>
+                            <li class="flex justify-between"><span>A. Silva (Defenders United)</span><span class="font-bold">8.5</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Team of the Week/Month -->
+            <div class="bg-gray-900 rounded-xl p-6 shadow-lg mt-12 fade-in delay-6">
+                <h3 class="text-xl font-bold mb-4 text-yellow-400">Team of the Week/Month</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm text-left">
+                        <thead class="bg-gray-800 text-yellow-300">
+                            <tr>
+                                <th class="px-4 py-2">Pos</th>
+                                <th class="px-4 py-2">Player</th>
+                                <th class="px-4 py-2">Club</th>
+                                <th class="px-4 py-2">Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-700">
+                            <tr><td class="px-4 py-2">GK</td><td class="px-4 py-2">L. Garcia</td><td class="px-4 py-2">Defenders United</td><td class="px-4 py-2">8.2</td></tr>
+                            <tr><td class="px-4 py-2">RB</td><td class="px-4 py-2">A. Silva</td><td class="px-4 py-2">Defenders United</td><td class="px-4 py-2">8.5</td></tr>
+                            <tr><td class="px-4 py-2">CB</td><td class="px-4 py-2">Copilot</td><td class="px-4 py-2">Goal Machine FC</td><td class="px-4 py-2">8.9</td></tr>
+                            <tr><td class="px-4 py-2">CB</td><td class="px-4 py-2">J. Smith</td><td class="px-4 py-2">Midfield Masters</td><td class="px-4 py-2">8.4</td></tr>
+                            <tr><td class="px-4 py-2">LB</td><td class="px-4 py-2">M. Müller</td><td class="px-4 py-2">Goal Machine FC</td><td class="px-4 py-2">8.7</td></tr>
+                            <tr><td class="px-4 py-2">RM</td><td class="px-4 py-2">A. Silva</td><td class="px-4 py-2">Defenders United</td><td class="px-4 py-2">8.5</td></tr>
+                            <tr><td class="px-4 py-2">CM</td><td class="px-4 py-2">Copilot</td><td class="px-4 py-2">Goal Machine FC</td><td class="px-4 py-2">8.9</td></tr>
+                            <tr><td class="px-4 py-2">CM</td><td class="px-4 py-2">J. Smith</td><td class="px-4 py-2">Midfield Masters</td><td class="px-4 py-2">8.4</td></tr>
+                            <tr><td class="px-4 py-2">LM</td><td class="px-4 py-2">M. Müller</td><td class="px-4 py-2">Goal Machine FC</td><td class="px-4 py-2">8.7</td></tr>
+                            <tr><td class="px-4 py-2">ST</td><td class="px-4 py-2">Copilot</td><td class="px-4 py-2">Goal Machine FC</td><td class="px-4 py-2">8.9</td></tr>
+                            <tr><td class="px-4 py-2">ST</td><td class="px-4 py-2">A. Silva</td><td class="px-4 py-2">Defenders United</td><td class="px-4 py-2">8.5</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transfer Market Section with Search -->
+    <section id="transfer-market" class="py-16 px-4 bg-gray-900">
+        <div class="container mx-auto">
+            <div class="text-center mb-8 fade-in">
+                <h2 class="text-3xl font-bold mb-3">Transfer Market</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Find clubs and players available for transfer</p>
+            </div>
+            <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 justify-center mb-8">
+                <input id="transfer-club-search" type="text" placeholder="Search clubs..." class="w-full max-w-md px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+                <input id="transfer-player-search" type="text" placeholder="Search players..." class="w-full max-w-md px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="w-full">
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400">Clubs</h3>
+                    <div id="transfer-club-list" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="club-card bg-gray-800 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-1" data-name="Goal Machine FC">
+                            <h3 class="font-bold text-lg mb-2">Goal Machine FC</h3>
+                            <p class="text-gray-400">Top scoring club in the league.</p>
+                        </div>
+                        <div class="club-card bg-gray-800 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-2" data-name="Defenders United">
+                            <h3 class="font-bold text-lg mb-2">Defenders United</h3>
+                            <p class="text-gray-400">Best defensive record.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400">Players</h3>
+                    <div id="transfer-player-list" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="club-card bg-gray-900 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-1" data-name="Goal Machine">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex items-center">
+                                    <div class="bg-yellow-500 text-gray-900 font-bold w-8 h-8 rounded-full flex items-center justify-center mr-3">1</div>
+                                    <h3 class="font-bold">Goal Machine</h3>
+                                </div>
+                                <span class="text-green-500 text-sm font-bold">⚽ 12</span>
+                            </div>
+                            <div class="flex justify-between mb-4">
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">8.9</p>
+                                    <p class="text-xs text-gray-400">Avg Rating</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">4</p>
+                                    <p class="text-xs text-gray-400">Assists</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">5</p>
+                                    <p class="text-xs text-gray-400">MVP</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-center">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-16 h-16 rounded-full border-2 border-yellow-500" alt="Player">
+                            </div>
+                        </div>
+                        <div class="club-card bg-gray-900 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-2" data-name="Defensive Wall">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex items-center">
+                                    <div class="bg-yellow-500 text-gray-900 font-bold w-8 h-8 rounded-full flex items-center justify-center mr-3">2</div>
+                                    <h3 class="font-bold">Defensive Wall</h3>
+                                </div>
+                                <span class="text-green-500 text-sm font-bold">🛡️ 10</span>
+                            </div>
+                            <div class="flex justify-between mb-4">
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">8.5</p>
+                                    <p class="text-xs text-gray-400">Avg Rating</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">2</p>
+                                    <p class="text-xs text-gray-400">Assists</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">3</p>
+                                    <p class="text-xs text-gray-400">MVP</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-center">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-16 h-16 rounded-full border-2 border-yellow-500" alt="Player">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 bg-gray-900">
+        <div class="container mx-auto">
+            <div class="text-center mb-8 fade-in">
+                <h2 class="text-3xl font-bold mb-3 text-yellow-400">About Us</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto text-lg">Our Mission</p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-gray-800 rounded-xl p-8 shadow-lg fade-in delay-1">
+                <p class="text-gray-200 text-lg mb-4">
+                    We are dedicated to uniting the global Pro Clubs community by delivering real-time access to tournaments, team stats, match results, and player performance data. Our platform is your all-in-one companion for managing and tracking Pro Clubs competitions, teams, and player achievements—both on the web and directly within Discord servers.
+                </p>
+                <p class="text-gray-200 text-lg mb-4">
+                    We empower players, clubs, and fans with:
+                </p>
+                <ul class="list-disc list-inside text-gray-300 mb-4">
+                    <li>Instant tournament schedules, live results, and dynamic league tables</li>
+                    <li>Comprehensive team and player statistics, including top scorers, assists, and MVPs</li>
+                    <li>Seamless integration with Discord for notifications, match reporting, and community engagement</li>
+                    <li>Tools for club management, player scouting, and transfer market activity</li>
+                </ul>
+                <p class="text-gray-200 text-lg">
+                    Whether you’re a competitive player, a club manager, or a passionate fan, our mission is to make your Pro Clubs experience more connected, transparent, and exciting than ever before.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+
+        // Countdown Timer
+        function startCountdown(targetDate) {
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetDate - now;
+                if (diff <= 0) {
+                    document.getElementById('countdown-days').textContent = '00';
+                    document.getElementById('countdown-hours').textContent = '00';
+                    document.getElementById('countdown-minutes').textContent = '00';
+                    document.getElementById('countdown-seconds').textContent = '00';
+                    return;
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+                document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        // Set your tournament start date here (YYYY-MM-DDTHH:MM:SS)
+        startCountdown(new Date('2025-08-21T18:00:00'));
+
+        // Transfer Market club search filter
+        const transferClubSearch = document.getElementById('transfer-club-search');
+        const transferClubList = document.getElementById('transfer-club-list');
+        if (transferClubSearch && transferClubList) {
+            transferClubSearch.addEventListener('input', function() {
+                const val = this.value.toLowerCase();
+                Array.from(transferClubList.children).forEach(card => {
+                    const name = card.getAttribute('data-name')?.toLowerCase() || '';
+                    card.style.display = name.includes(val) ? '' : 'none';
+                });
+            });
+        }
+        // Transfer Market player search filter
+        const transferPlayerSearch = document.getElementById('transfer-player-search');
+        const transferPlayerList = document.getElementById('transfer-player-list');
+        if (transferPlayerSearch && transferPlayerList) {
+            transferPlayerSearch.addEventListener('input', function() {
+                const val = this.value.toLowerCase();
+                Array.from(transferPlayerList.children).forEach(card => {
+                    const name = card.getAttribute('data-name')?.toLowerCase() || '';
+                    card.style.display = name.includes(val) ? '' : 'none';
+                });
+            });
+        }
+
+        // EA FC 25 Club Data Fetch Example (Best Practice: fetch from backend or directly from EA API)
+        document.getElementById('ea-club-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const clubId = document.getElementById('ea-club-id').value.trim();
+            const platform = document.getElementById('ea-platform').value;
+            const resultDiv = document.getElementById('ea-club-result');
+            resultDiv.innerHTML = '<span class="text-gray-400">Fetching data...</span>';
+            try {
+                // Example EA Pro Clubs API endpoint (replace with actual endpoint and handle CORS/backend proxy as needed)
+                // For real use, fetch from your backend or a serverless function that calls EA's API securely
+                const apiUrl = `https://proclubs.ea.com/api/clubdetails?platform=${platform}&clubId=${clubId}`;
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Club not found or EA API error');
+                const data = await response.json();
+                // Render club info (customize as needed)
+                resultDiv.innerHTML = `
+                    <div class='bg-gray-900 rounded-xl p-6 shadow-lg mt-4'>
+                        <h3 class='text-xl font-bold text-yellow-400 mb-2'>${data.clubName || 'Club'}</h3>
+                        <p class='text-gray-300 mb-2'>Members: ${data.members?.length || 'N/A'}</p>
+                        <p class='text-gray-400 mb-2'>Division: ${data.division || 'N/A'}</p>
+                        <p class='text-gray-400 mb-2'>Wins: ${data.wins || 'N/A'} | Draws: ${data.draws || 'N/A'} | Losses: ${data.losses || 'N/A'}</p>
+                        <p class='text-gray-400'>Recent Match: ${data.recentMatchResult || 'N/A'}</p>
+                    </div>
+                `;
+            } catch (err) {
+                resultDiv.innerHTML = `<span class='text-red-400'>Error: ${err.message}</span>`;
+            }
+        });
+
+        // --- SAMPLE: Fetch and render clubs from backend API ---
+        async function fetchAndRenderClubs() {
+            try {
+                const res = await fetch('/api/clubs');
+                if (!res.ok) throw new Error('Failed to fetch clubs');
+                const clubs = await res.json();
+                const clubList = document.getElementById('club-list');
+                if (clubList && Array.isArray(clubs)) {
+                    clubList.innerHTML = clubs.map((club, i) => `
+                        <div class="club-card bg-gray-800 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-${(i%4)+1}" data-name="${club.name}">
+                            <h3 class="font-bold text-lg mb-2">${club.name}</h3>
+                            <p class="text-gray-400">${club.description || ''}</p>
+                        </div>
+                    `).join('');
+                }
+                // Also update transfer market clubs
+                const transferClubList = document.getElementById('transfer-club-list');
+                if (transferClubList && Array.isArray(clubs)) {
+                    transferClubList.innerHTML = clubs.map((club, i) => `
+                        <div class="club-card bg-gray-800 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-${(i%4)+1}" data-name="${club.name}">
+                            <h3 class="font-bold text-lg mb-2">${club.name}</h3>
+                            <p class="text-gray-400">${club.description || ''}</p>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                // Optionally show error
+            }
+        }
+
+        // --- SAMPLE: Fetch and render players from backend API ---
+        async function fetchAndRenderPlayers() {
+            try {
+                const res = await fetch('/api/players');
+                if (!res.ok) throw new Error('Failed to fetch players');
+                const players = await res.json();
+                const playerList = document.getElementById('transfer-player-list');
+                if (playerList && Array.isArray(players)) {
+                    playerList.innerHTML = players.map((player, i) => `
+                        <div class="club-card bg-gray-900 rounded-xl p-6 shadow-lg transition transform hover:scale-105 fade-in delay-${(i%4)+1}" data-name="${player.name}">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex items-center">
+                                    <div class="bg-yellow-500 text-gray-900 font-bold w-8 h-8 rounded-full flex items-center justify-center mr-3">${i+1}</div>
+                                    <h3 class="font-bold">${player.name}</h3>
+                                </div>
+                                <span class="text-green-500 text-sm font-bold">⚽ ${player.goals || 0}</span>
+                            </div>
+                            <div class="flex justify-between mb-4">
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">${player.rating || '-'}</p>
+                                    <p class="text-xs text-gray-400">Avg Rating</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">${player.assists || 0}</p>
+                                    <p class="text-xs text-gray-400">Assists</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold">${player.mvp || 0}</p>
+                                    <p class="text-xs text-gray-400">MVP</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-center">
+                                <img src="${player.avatar || 'https://randomuser.me/api/portraits/men/32.jpg'}" class="w-16 h-16 rounded-full border-2 border-yellow-500" alt="Player">
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                // Optionally show error
+            }
+        }
+
+        // --- SAMPLE: Fetch and render standings from backend API ---
+        async function fetchAndRenderStandings() {
+            try {
+                const res = await fetch('/api/standings');
+                if (!res.ok) throw new Error('Failed to fetch standings');
+                const standings = await res.json();
+                // Render league table
+                const tableBody = document.querySelector('#standings table tbody');
+                if (tableBody && Array.isArray(standings)) {
+                    tableBody.innerHTML = standings.map((row, i) => `
+                        <tr class="border-b border-gray-800">
+                            <td class="px-4 py-2${i === 0 ? ' font-bold' : ''}">${i+1}</td>
+                            <td class="px-4 py-2 flex items-center space-x-2"><img src="${row.logo || 'https://img.icons8.com/color/32/000000/trophy.png'}" class="inline w-6 h-6">${row.club}</td>
+                            <td class="px-4 py-2">${row.p}</td>
+                            <td class="px-4 py-2">${row.w}</td>
+                            <td class="px-4 py-2">${row.d}</td>
+                            <td class="px-4 py-2">${row.l}</td>
+                            <td class="px-4 py-2">${row.gf}</td>
+                            <td class="px-4 py-2">${row.ga}</td>
+                            <td class="px-4 py-2">${row.gd}</td>
+                            <td class="px-4 py-2 font-bold${i === 0 ? ' text-yellow-400' : ''}">${row.pts}</td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (err) {
+                // Optionally show error
+            }
+        }
+        // Uncomment to enable live club list from backend
+        fetchAndRenderClubs();
+        // Uncomment to enable live player list from backend
+        fetchAndRenderPlayers();
+        // Uncomment to enable live standings from backend
+        fetchAndRenderStandings();
+
+        // --- SAMPLE: Trigger Discord bot action via backend ---
+        // Example: Report match result to Discord
+        async function reportMatchToDiscord(matchId) {
+            try {
+                const res = await fetch('/api/discord/report-match', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ matchId })
+                });
+                const result = await res.json();
+                alert(result.message || 'Reported to Discord!');
+            } catch (err) {
+                alert('Failed to report to Discord.');
+            }
+        }
+        // Example button (add to UI as needed):
+        // <button onclick="reportMatchToDiscord('sampleMatchId')">Report Match to Discord</button>
+
+        // --- SECURITY & BEST PRACTICES ---
+        // - Never expose MongoDB or Discord credentials in frontend code.
+        // - All sensitive actions (DB writes, Discord bot triggers) must go through backend endpoints.
+        // - Use environment variables for credentials in backend/bot (see server.js, discord-bot.js).
+        // - Use HTTPS in production and validate all user input on backend.
+        // - For live EA FC 25 data, proxy requests through backend to avoid CORS and protect API keys if needed.
+
+        // Fetch and render clubs from backend API (live)
+        document.addEventListener('DOMContentLoaded', fetchAndRenderClubs);
+        // Fetch and render players from backend API (live)
+        document.addEventListener('DOMContentLoaded', fetchAndRenderPlayers);
+        // Fetch and render standings from backend API (live)
+        document.addEventListener('DOMContentLoaded', fetchAndRenderStandings);
+    </script>
+
+    <footer class="w-full bg-gray-900 text-gray-400 text-center py-4 mt-12">
+        Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=RaynnerMaximus/proclubsv1-0" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a>
+    </footer>
+</body>
+</html>

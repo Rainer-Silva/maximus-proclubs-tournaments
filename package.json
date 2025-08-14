@@ -1,0 +1,24 @@
+{
+  "name": "proclubsv1-0",
+  "version": "1.0.0",
+  "description": "Pro Clubs Championship backend and Discord bot integration.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "bot": "node discord-bot.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "discord.js": "^14.14.1",
+    "node-fetch": "^2.6.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
